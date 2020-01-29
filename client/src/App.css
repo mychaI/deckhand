@@ -1,0 +1,28 @@
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.App {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    "a b c"
+	"d e f"
+	"g h i";
+}
+
+.search-container {
+  grid-area: b;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+
+
