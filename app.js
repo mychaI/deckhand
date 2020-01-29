@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
+var api = require('./routes/api');
 var users = require('./routes/users');
 
 var app = express();
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/api', api)
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -43,4 +45,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+const PORT = 5000;
+
+app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
+
+//module.exports = app;
