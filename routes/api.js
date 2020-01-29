@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const axios = require('axios');
-const querystring = require('querystring');
 const { client_id, client_secret } = require('../config/keys');
 
 router.post('/search/', (req, res) => {
@@ -13,7 +12,7 @@ router.post('/search/', (req, res) => {
   axios({
 	url: 'https://us.battle.net/oauth/token', 
 	method: 'POST', 
-	data: { grant_type: 'client_credentials' },
+	data: 'grant_type=client_credentials',
 	auth: Authentication,
 	headers: {
 	  Accept: 'application/json',
