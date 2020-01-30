@@ -4,6 +4,8 @@ import { SpringGrid } from 'react-stonecutter';
 import { TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import Empty from '../presentation/Empty';
+
 
 const useStyles = makeStyles({
   submit: {
@@ -38,6 +40,7 @@ const Dashboard = () => {
 		<Button className={classes.submit} variant='contained' color='primary' onClick={submitHandler}>Submit</Button>
 	  </div>
 	  <div id='result-container'>
+	    { state.cards ? null : <div><Empty /></div>}
 	    <SpringGrid
 		  component="ul"
 		  columns={3}
@@ -51,7 +54,7 @@ const Dashboard = () => {
 			<li key={card.id} className='card-container'>
 			  <img src={card.image} />
 		 	</li>
-		  )) : <p>Hi</p>
+		  )) : null
 		  }
 		</SpringGrid>
 	  </div>
