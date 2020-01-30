@@ -15,15 +15,16 @@ const useStyles = makeStyles({
 });
 
 const Dashboard = () => {
+  const [search, setSearch] = useState({});
   const [state, setState] = useState({});
 
   const updateField = e => {
-	setState({[e.target.name]: e.target.value});
+	setSearch({[e.target.name]: e.target.value});
   };
 
   const submitHandler = () => {
 	console.log('searching');
-	axios.post('/api/search/text', { text: state.text })
+	axios.post('/api/search/text', { text: search.text })
 	  .then( res => setState({ 
 		cards: res.data.cards, 
 		cardCount: res.data.cardCount
@@ -36,7 +37,7 @@ const Dashboard = () => {
   return (
     <>
 	  <div id='search-container'>
-		<TextField id='search-card' label='Search for Cards' variant='outlined' name='text' value={state.text} onChange={updateField} />
+		<TextField id='search-card' label='Search for Cards' variant='outlined' name='text' value={search.text} onChange={updateField} />
 		<Button className={classes.submit} variant='contained' color='primary' onClick={submitHandler}>Submit</Button>
 	  </div>
 	  <div id='result-container'>
