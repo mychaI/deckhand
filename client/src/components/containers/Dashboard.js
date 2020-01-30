@@ -12,10 +12,10 @@ const useStyles = makeStyles({
 });
 
 const Dashboard = () => {
-  const [keyword, setKeyword] = useState('');
+  const [state, setState] = useState({});
 
   const updateField = e => {
-	setKeyword(e.target.value);
+	setState({[e.target.name]: e.target.value});
   };
 
   const classes = useStyles();
@@ -23,7 +23,7 @@ const Dashboard = () => {
   return (
     <>
 	  <div className='search-container'>
-		<TextField id='search-card' label='Search by Keyword' variant='outlined' name='keyword' value={keyword} onChange={updateField} />
+		<TextField id='search-card' label='Search by Keyword' variant='outlined' name='keyword' value={state.keyword} onChange={updateField} />
 		<Button className={classes.submit} variant='contained' color='primary'>Submit</Button>
 	  </div>
 	</>
