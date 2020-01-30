@@ -40,6 +40,7 @@ router.post('/token/', (req, res) => {
 
 router.post('/search/text', (req,res) => {
   const text = encodeURIComponent(req.body.text.trim());
+  console.log('text', text);
   if (!token) {
 	axios.post('http://localhost:5000/api/token')
 	  .then( response => { console.log('token saved') })

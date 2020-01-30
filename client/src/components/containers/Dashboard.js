@@ -18,13 +18,26 @@ const Dashboard = () => {
 	setState({[e.target.name]: e.target.value});
   };
 
+  const submitHandler = () => {
+	console.log('searching');
+	axios.post('/api/search/text', { text: state.text })
+	  .then( res => setState({ 
+		cards: res.data.cards, 
+		cardCount: res.data.cardCount
+	  }))
+	  .then( () => console.log(state.cards))
+	  .catch( err => console.log('Error: ', err));
+  };
+
   const classes = useStyles();
 
   return (
     <>
 	  <div className='search-container'>
-		<TextField id='search-card' label='Search by Keyword' variant='outlined' name='keyword' value={state.keyword} onChange={updateField} />
-		<Button className={classes.submit} variant='contained' color='primary'>Submit</Button>
+		<TextField id='search-card' label='Search for Cards' variant='outlined' name='text' value={state.text} onChange={updateField} />
+		<Button className={classes.submit} variant='contained' color='primary' onClick={submitHandler}>Submit</Button>
+	  </div>
+	  <div className='result-container'>
 	  </div>
 	</>
   )
