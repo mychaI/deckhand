@@ -17,6 +17,7 @@ const useStyles = makeStyles({
 const Dashboard = () => {
   const [search, setSearch] = useState({});
   const [state, setState] = useState({});
+  const [deck, setDeck] = useState([]);
 
   const updateField = e => {
 	setSearch({[e.target.name]: e.target.value});
@@ -31,6 +32,12 @@ const Dashboard = () => {
 	  }))
 	  .catch( err => console.log('Error: ', err));
   };
+
+  const addToDeck = e => {
+	console.log(e.currentTarget.dataset.id);
+	setDeck([...deck, e.currentTarget.dataset.id])
+  }
+
 
   const classes = useStyles();
 
@@ -52,7 +59,7 @@ const Dashboard = () => {
 		  springConfig={{ stiffness: 150, damping: 28 }}
 		>
 		  {state.cards ? state.cards.map( card => (
-			<li key={card.id} className='card-container'>
+			<li key={card.id} data-id={card.id} className='card-container' onClick={addToDeck}>
 			  <img src={card.image} />
 		 	</li>
 		  )) : null
