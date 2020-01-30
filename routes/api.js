@@ -38,6 +38,30 @@ router.post('/token/', (req, res) => {
 
 });
 
+router.post('/search/text', (req,res) => {
+  const text = encodeURIComponent(req.body.text.trim());
+  if (!token) {
+	axios.post('http://localhost:5000/api/token')
+	  .then( response => { console.log('token saved') })
+	  .then( () => {
+			let request = base_url+'&textFilter='+text+'&access_token='+token.access_token;
+			console.log(request);
+			axios.get(request)
+			  .then( data => res.json(data.data))
+			  .catch( err => console.log('Error: ', err));
+	  })
+	  .catch( err => console.log('Error: ', err));
+  } else {
+	console.log('firing');
+	let request = base_url+'&textFilter='+text+'&access_token='+token.access_token;
+	console.log(request);
+	axios.get(request)
+	  .then( data => res.json(data.data))
+	  .catch( err => console.log('Error: ', err));
+  }
+
+});
+
 
 router.post('/search/keyword', (req,res) => {
   const keyword = req.body.keyword;
@@ -59,7 +83,7 @@ router.post('/search/keyword', (req,res) => {
 	axios.get(request)
 	  .then( data => res.json(data.data))
 	  .catch( err => console.log('Error: ', err));
-}
+  }
 
 });
 
