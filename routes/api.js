@@ -2,8 +2,7 @@ const router = require('express').Router();
 const axios = require('axios');
 const { client_id, client_secret } = require('../config/keys');
 
-router.post('/search/', (req, res) => {
-  const keyword = req.body.keyword;
+router.post('/token/', (req, res) => {
   const Authentication = {
 	username: client_id,
 	password: client_secret,
@@ -18,12 +17,12 @@ router.post('/search/', (req, res) => {
 	  Accept: 'application/json',
 	  'Content-Type': 'application/x-www-form-urlencoded'
 	}})
-  	.then( res => console.log(res) )
+  	.then( response => {
+	  console.log(response);
+	  res.json(response.data);
+	})
 	.catch( err=> console.log('Error: ', err));
 
-  res.json({
-	keyword
-  });
 });
 
 module.exports = router;
