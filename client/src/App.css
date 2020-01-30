@@ -13,15 +13,27 @@
   grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
     "a b c"
-	"d e f"
+	"e e e"
 	"g h i";
 }
 
-.search-container {
+#search-container {
   grid-area: b;
   display: grid;
   justify-content: center;
   align-content: center;
+}
+
+#result-container {
+  grid-area: e;
+  padding: 25px;
+}
+
+.card-container {
+  list-style-type: none;
+}
+
+.card-container > img {
 }
 
 

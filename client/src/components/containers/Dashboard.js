@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { SpringGrid } from 'react-stonecutter';
 import { TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -25,7 +26,6 @@ const Dashboard = () => {
 		cards: res.data.cards, 
 		cardCount: res.data.cardCount
 	  }))
-	  .then( () => console.log(state.cards))
 	  .catch( err => console.log('Error: ', err));
   };
 
@@ -33,11 +33,27 @@ const Dashboard = () => {
 
   return (
     <>
-	  <div className='search-container'>
+	  <div id='search-container'>
 		<TextField id='search-card' label='Search for Cards' variant='outlined' name='text' value={state.text} onChange={updateField} />
 		<Button className={classes.submit} variant='contained' color='primary' onClick={submitHandler}>Submit</Button>
 	  </div>
-	  <div className='result-container'>
+	  <div id='result-container'>
+	    <SpringGrid
+		  component="ul"
+		  columns={3}
+		  columnWidth={375}
+		  gutterWidth={5}
+		  gutterHeight={5}
+		  itemHeight={518}
+		  springConfig={{ stiffness: 150, damping: 28 }}
+		>
+		  {state.cards ? state.cards.map( card => (
+			<li key={card.id} className='card-container'>
+			  <img src={card.image} />
+		 	</li>
+		  )) : <p>Hi</p>
+		  }
+		</SpringGrid>
 	  </div>
 	</>
   )
