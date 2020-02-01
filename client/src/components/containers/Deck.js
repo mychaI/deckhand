@@ -5,7 +5,7 @@ const Deck = props => {
   const cards = props.deck.map( (card, i) => (
     <li key={i} data-id={card.id} className='card-bar'>
 	  <span>
-		<img src={card.cropImage} />
+		<img src={card.cropImage} alt={card.name} />
 	  </span>
 	</li>
   ));

@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 });
 
 const Dashboard = () => {
-  const [search, setSearch] = useState({});
+  const [search, setSearch] = useState({text: ''});
   const [state, setState] = useState({});
   const [deck, setDeck] = useState([]);
 
@@ -35,8 +35,9 @@ const Dashboard = () => {
   };
 
   const addToDeck = e => {
-	console.log(e.currentTarget.dataset.id);
-	setDeck([...deck, e.currentTarget.dataset.index])
+	const target = e.currentTarget.dataset.index;
+	console.log(target, state.cards[target]);
+	setDeck([ ...deck, state.cards[target] ])
   }
 
 
@@ -61,7 +62,7 @@ const Dashboard = () => {
 		>
 		  {state.cards ? state.cards.map( (card, i) => (
 			<li key={card.id} data-id={card.id} data-index={i} className='card-container' onClick={addToDeck}>
-			  <img src={card.image} />
+			  <img src={card.image} alt={card.name}/>
 		 	</li>
 		  )) : null
 		  }
@@ -69,6 +70,7 @@ const Dashboard = () => {
 	  </div>
 	  <div id='deck-container'>
 		<h1>My Deck</h1>
+		<Deck deck={deck} />
 	  </div>
 	</>
   )
