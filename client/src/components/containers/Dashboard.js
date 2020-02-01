@@ -5,6 +5,7 @@ import { TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Empty from '../presentation/Empty';
+import Stats from '../presentation/Stats';
 import Deck from '../containers/Deck';
 
 
@@ -48,6 +49,9 @@ const Dashboard = () => {
 	  <div id='search-container'>
 		<TextField id='search-card' label='Search for Cards' variant='outlined' name='text' value={search.text} onChange={updateField} />
 		<Button className={classes.submit} variant='contained' color='primary' onClick={submitHandler}>Submit</Button>
+	  </div>
+	  <div id='stats-container'>
+	    <Stats numCards={deck.length} />
 	  </div>
 	  <div id='result-container'>
 	    { state.cards ? null : <div id='empty-container'><Empty /></div>}
