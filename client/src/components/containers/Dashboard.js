@@ -48,7 +48,7 @@ const Dashboard = () => {
 		<Button className={classes.submit} variant='contained' color='primary' onClick={submitHandler}>Submit</Button>
 	  </div>
 	  <div id='result-container'>
-	    { state.cards ? null : <div><Empty /></div>}
+	    { state.cards ? null : <div id='empty-container'><Empty /></div>}
 	    <SpringGrid
 		  component="ul"
 		  columns={3}
@@ -65,6 +65,9 @@ const Dashboard = () => {
 		  )) : null
 		  }
 		</SpringGrid>
+	  </div>
+	  <div id='deck-container'>
+		<h1>My Cards</h1>
 	  </div>
 	</>
   )

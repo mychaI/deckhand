@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "concurrently \"nodemon app.js\" \"yarn start --prefix client\""
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -14,5 +15,8 @@
     "hjs": "~0.0.6",
     "morgan": "~1.9.0",
     "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0"
   }
 }
