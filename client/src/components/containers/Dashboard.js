@@ -69,7 +69,7 @@ const Dashboard = () => {
 		</SpringGrid>
 	  </div>
 	  <div id='deck-container'>
-		<h1>My Deck</h1>
+		<h1 id='deck-header'>My Deck</h1>
 		<Deck deck={deck} />
 	  </div>
 	</>
