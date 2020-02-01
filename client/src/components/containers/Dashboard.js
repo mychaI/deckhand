@@ -5,6 +5,7 @@ import { TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Empty from '../presentation/Empty';
+import Deck from '../containers/Deck';
 
 
 const useStyles = makeStyles({
@@ -35,7 +36,7 @@ const Dashboard = () => {
 
   const addToDeck = e => {
 	console.log(e.currentTarget.dataset.id);
-	setDeck([...deck, e.currentTarget.dataset.id])
+	setDeck([...deck, e.currentTarget.dataset.index])
   }
 
 
@@ -58,8 +59,8 @@ const Dashboard = () => {
 		  itemHeight={518}
 		  springConfig={{ stiffness: 150, damping: 28 }}
 		>
-		  {state.cards ? state.cards.map( card => (
-			<li key={card.id} data-id={card.id} className='card-container' onClick={addToDeck}>
+		  {state.cards ? state.cards.map( (card, i) => (
+			<li key={card.id} data-id={card.id} data-index={i} className='card-container' onClick={addToDeck}>
 			  <img src={card.image} />
 		 	</li>
 		  )) : null
@@ -67,7 +68,7 @@ const Dashboard = () => {
 		</SpringGrid>
 	  </div>
 	  <div id='deck-container'>
-		<h1>My Cards</h1>
+		<h1>My Deck</h1>
 	  </div>
 	</>
   )
