@@ -41,6 +41,12 @@ const Dashboard = () => {
 	setDeck([ ...deck, state.cards[target] ])
   }
 
+  const showDeck = () => {
+	setState({
+	  cards: deck
+	});
+  }
+
 
   const classes = useStyles();
 
@@ -73,7 +79,7 @@ const Dashboard = () => {
 		</SpringGrid>
 	  </div>
 	  <div id='deck-container'>
-		<h1 id='deck-header'>My Deck</h1>
+		<h1 id='deck-header' onClick={showDeck}>My Deck</h1>
 		<Deck deck={deck} />
 	  </div>
 	</>
