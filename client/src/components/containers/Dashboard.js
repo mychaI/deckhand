@@ -57,7 +57,7 @@ const Dashboard = () => {
 		<Button className={classes.submit} variant='contained' color='primary' onClick={submitHandler}>Submit</Button>
 	  </div>
 	  <div id='stats-container'>
-	    <Stats numCards={deck.length} />
+	    <Stats deck={deck} />
 	  </div>
 	  <div id='result-container'>
 	    { state.cards ? null : <div id='empty-container'><Empty /></div>}
