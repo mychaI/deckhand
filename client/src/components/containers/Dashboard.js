@@ -41,6 +41,12 @@ const Dashboard = () => {
 	setDeck([ ...deck, state.cards[target] ])
   }
 
+  const removeFromDeck = i => {
+    const deckCopy = [...deck];
+	deckCopy.splice(i, 1);
+	setDeck(deckCopy);
+  }
+
   const showDeck = () => {
 	setState({
 	  cards: deck
@@ -80,7 +86,7 @@ const Dashboard = () => {
 	  </div>
 	  <div id='deck-container'>
 		<h1 id='deck-header' onClick={showDeck}>My Deck</h1>
-		<Deck deck={deck} />
+		<Deck deck={deck} removeFromDeck={removeFromDeck} />
 	  </div>
 	</>
   )
