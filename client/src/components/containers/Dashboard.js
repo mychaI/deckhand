@@ -71,7 +71,7 @@ const Dashboard = () => {
 		  springConfig={{ stiffness: 150, damping: 28 }}
 		>
 		  {state.cards ? state.cards.map( (card, i) => (
-			<li key={card.id} data-id={card.id} data-index={i} className='card-container' onClick={addToDeck}>
+			<li key={i} data-id={card.id} data-index={i} className='card-container' onClick={addToDeck}>
 			  <img src={card.image} alt={card.name}/>
 		 	</li>
 		  )) : null
