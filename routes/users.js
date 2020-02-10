@@ -6,4 +6,16 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+router.post('/register', (req, res) => {
+  res.json({
+	confirmation: 'successfully registered'
+  });
+});
+
+router.post('/login', (req, res) => {
+  res.json({
+	confirmation: 'successfully logged in'
+  });
+});
+
 module.exports = router;
