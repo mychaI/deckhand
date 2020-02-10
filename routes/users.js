@@ -1,17 +1,27 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const authController = require('../controllers/auth');
 
-router.post('/register', (req, res) => {
+
+/* 
+  @route  POST /register
+  @descr  Register a new user
+  @access Public
+*/
+
+router.post('/register', authController.createUser, (req, res) => {
   res.json({
-	confirmation: 'successfully registered'
+	confirmation: 'successfully registered',
+	username: res.locals.username
   });
 });
 
+/* 
+  @route  POST /login
+  @descr  Log in an existing user
+  @access Public
+*/
 router.post('/login', (req, res) => {
   res.json({
 	confirmation: 'successfully logged in'
