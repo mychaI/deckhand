@@ -31,7 +31,39 @@ module.exports = {
 
   loginUser: (req, res, next) => {
 	// log in user
+	const { username, password } = req.body;
 
-  }
+	const queryString = `
+	  SELECT id, username, password
+	  FROM users
+	  WHERE username = $1
+	`;
+
+	db.query(queryString, [username])
+	  .then( data => {
+		if (data.rows.length === 0) {
+		  return res.status(404).json({
+			invalid_auth: 'Invalid username or password'
+		  });
+		}
+
+		const username = data.rows[0].username;
+		const hashed_password = data.rows[0].password;
+
+		bcrypt.compare(password, hashed_password, (err, isMatch) => {
+		  if (err) return next(err);
+		  if (isMatch) {
+			console.log('user logged in');
+			return next();
+		  } else {
+			res.status(403).json({ invalid_auth: 'Invalid username or password' });
+		  }
+		});
+	  })
+	  .catch( err => {
+		console.log('Error logging in user');
+		return next({err});
+	  });
+  },
 
 };

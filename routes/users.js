@@ -22,9 +22,10 @@ router.post('/register', authController.createUser, (req, res) => {
   @descr  Log in an existing user
   @access Public
 */
-router.post('/login', (req, res) => {
+router.post('/login', authController.loginUser, (req, res) => {
   res.json({
-	confirmation: 'successfully logged in'
+	confirmation: 'successfully logged in',
+	username: res.locals.username
   });
 });
 
