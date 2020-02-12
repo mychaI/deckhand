@@ -22,6 +22,9 @@ const useStyles = makeStyles({
   authButton: {
 	width: '90%',
 	margin: '20px'
+  },
+  authInput: {
+	marginBottom: '5px'
   }
 });
 
@@ -29,19 +32,33 @@ const Login = () => {
 
   const classes = useStyles();
 
-  const [login, setLogin] = useState({});
-  const updateField = e => {
-	setLogin({[e.target.name] : e.target.value});
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const updateUsername = e => {
+	setUsername(e.target.value);
   };
+
+  const updatePassword = e => {
+	setPassword(e.target.value);
+  };
+
   const submitHandler = () => {
-	console.log('Clicked submit');
+	const authObj = {
+	  username,
+	  password
+	}
+
+	axios.post('/users/login', authObj)
+		 .then( res => console.log(res.data))
+		 .catch( err => console.log('Error logging in: ', err));
   };
 
   return (
     <div className={classes.authContainer}>
 	  <h1>Log In</h1>
-	  <TextField id='input-username' label='Username' variant='outlined' name='username' value={login.username} onChange={updateField} />
-	  <TextField id='input-password' label='Password' variant='outlined' name='password' value={login.password} onChange={updateField}
+	  <TextField id='input-username' label='Username' variant='outlined' name='username' value={username} className={classes.authInput} onChange={updateUsername} />
+	  <TextField id='input-password' label='Password' variant='outlined' name='password' value={password} type='password' onChange={updatePassword}
 	  />
 	  <Button variant='contained' color='primary' onClick={submitHandler} className={classes.authButton}>Log In</Button>
 	</div>
