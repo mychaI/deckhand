@@ -10,7 +10,7 @@ const authController = require('../controllers/auth');
   @access Public
 */
 
-router.post('/register', authController.createUser, (req, res) => {
+router.post('/signup', authController.createUser, (req, res) => {
   res.json({
 	confirmation: 'successfully registered',
 	username: res.locals.username
