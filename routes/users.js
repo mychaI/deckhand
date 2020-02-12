@@ -25,7 +25,7 @@ router.post('/signup', authController.createUser, (req, res) => {
 router.post('/login', authController.loginUser, (req, res) => {
   res.json({
 	confirmation: 'successfully logged in',
-	username: res.locals.username
+	token: res.locals.token
   });
 });
 

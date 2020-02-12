@@ -1,6 +1,9 @@
 const db = require('../db');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const jwt = require('jsonwebtoken');
+const keys = require('../config/keys');
+const passport = require('passport');
 
 
 module.exports = {
@@ -54,7 +57,12 @@ module.exports = {
 		  if (err) return next(err);
 		  if (isMatch) {
 			console.log('user logged in');
-			return next();
+			jwt.sign({username}, keys.secretOrKey, { expiresIn: 900 }, (err, token) => {
+			  console.log('signing token', err);
+			  if (err) return next(err);
+			  res.locals.token = 'Bearer ' + token;
+			  return next();
+			});
 		  } else {
 			res.status(403).json({ invalid_auth: 'Invalid username or password' });
 		  }
